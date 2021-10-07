@@ -1,10 +1,14 @@
 <template>
-  <section>
-    <h3>Current Weather</h3>
+  <section class="post">
     <div>
-      <!-- <h4>{{ Math.ceil(currentWeather.feels_like) }}&#176;</h4>
-      <p>{{ currentWeather.weather[0].description }}</p>
-      <img :src="generateIconUrl(currentWeather.weather[0].icon)" /> -->
+      <h4>{{ post.temperature }}&#176;</h4>
+      <p>{{ post.summary  }}</p>
+      <img :src="post.icon_source" />
+    </div>
+    <div>
+      <h4>{{ post.name }}</h4>
+      <h4>{{ post.location }}</h4>
+      <p>{{ post.content }}</p>
     </div>
   </section>
 </template>
@@ -13,18 +17,13 @@
 export default {
   name: 'WeatherPost',
   props: {
-
-  },
-  methods: {
-    generateIconUrl(ico) {
-      return `http://openweathermap.org/img/wn/${ico}@2x.png`
-    },
-        enterName(e) {
-      this.$emit('handleName', e.target.value, e.keyCode)
-    },
-        submitName() {
-      this.$emit('submitName')
-    }
+    post: {}
   }
 }
 </script>
+
+<style scoped>
+  .post {
+    display: flex
+  }
+</style>

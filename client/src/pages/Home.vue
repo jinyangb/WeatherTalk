@@ -14,8 +14,13 @@
         <input name="location" type="text" placeholder="Location" :value="input.location" @change="handleChange"/>
         <button :disabled="!input.name" >Submit</button>
       </form>
-
-    <WeatherPost />
+    <div class="post-container">
+      <WeatherPost 
+        v-for="post in posts"
+        :key="post.id"
+        :post="post"
+      /> 
+    </div>
     <!-- <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
@@ -160,5 +165,10 @@ h4 {
 }
 .red {
   color: #e57373;
+}
+
+.post-container {
+  display: flex;
+  flex-flow: column-reverse;
 }
 </style>
