@@ -1,10 +1,18 @@
 <template>
   <div class="home">
-      <form @submit.prevent="name">
-        <input name="name" type="text" placeholder="Name" :value="name" @change="handleChange"/>
-        <input name="comment" type="text" placeholder="Comment" :value="comment" @change="handleChange"/>
-        <input name="location" type="text" placeholder="Location" :value="location" @change="handleChange"/>
-        <button @click="submit" :disabled="!name" >Submit</button>
+      <section>
+        <h3>Your Current Weather</h3>
+        <div>
+          <h4>{{ Math.ceil(this.currentWeather.feels_like) }}&#176;</h4>
+          <p>{{ this.currentWeather.weather[0].description }}</p>
+          <img :src="`http://openweathermap.org/img/wn/${this.currentWeather.weather[0].icon}@2x.png`" />
+        </div>
+      </section>
+      <form @submit.prevent="submitPost">
+        <input name="name" type="text" placeholder="Name" :value="input.name" @change="handleChange"/>
+        <input name="comment" type="text" placeholder="Comment" :value="input.comment" @change="handleChange"/>
+        <input name="location" type="text" placeholder="Location" :value="input.location" @change="handleChange"/>
+        <button :disabled="!input.name" >Submit</button>
       </form>
 
     <WeatherPost />
@@ -15,24 +23,67 @@
 
 <script>
 // @ is an alias to /src
+import axios from 'axios'
 import WeatherPost from '../components/WeatherPost.vue'
+const API_KEY = process.env.VUE_APP_WEATHER_KEY
+
 export default {
   name: 'Home',
   components: {
     WeatherPost
   },
   data: ()=> ({
-    name: '',
-    comment: '',
-    lcoation: ''
-
-  }),
-  methods: {
-    handleChange(event) {
-      this.name= event.target.value
-      console.log(event)
+    input: {
+      name: '',
+      comment: '',
+      location: ''
     },
-  }
+    currentWeather: null,
+    posts: []
+  }),
+  mounted: function(){
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      await this.getCurrentWeather(position.coords)
+    }),
+    this.getPosts()
+  },
+  methods: {
+    async submitPost() {
+      const ico = this.currentWeather.weather[0].icon
+      const data = {
+        "name": this.input.name,
+        "content": this.input.comment,
+        "location": this.input.location,
+        "temperature": Math.ceil(this.currentWeather.feels_like),
+        "summary": this.currentWeather.weather[0].description,
+        "icon_source": `http://openweathermap.org/img/wn/${ico}@2x.png`
+      }
+      try {
+        const res = await axios.post(
+          `http://localhost:5000/posts`, data
+        )
+        this.posts.push(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getCurrentWeather(coords) {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.latitude}&lon=${coords.longitude}&units=imperial&appid=${API_KEY}`
+      )
+      this.currentWeather = res.data.current
+    },
+    handleChange(event) {
+      this.input[event.target.name] = event.target.value
+    },
+    async getPosts(){
+      const res = await axios.get(
+        `http://localhost:5000/posts`
+      )
+      this.posts = res.data
+    },
+  },
+  
 }
 </script>
 
