@@ -36,6 +36,7 @@
 import axios from 'axios'
 import WeatherPost from '../components/WeatherPost.vue'
 const API_KEY = process.env.VUE_APP_WEATHER_KEY
+import {BASE_URL} from '../globals'
 
 export default {
   name: 'Home',
@@ -70,7 +71,7 @@ export default {
       }
       try {
         const res = await axios.post(
-          `http://localhost:5000/posts`, data
+          `${BASE_URL}/posts`, data
         )
         this.posts.push(res.data)
       } catch (error) {
@@ -88,14 +89,14 @@ export default {
     },
     async getPosts(){
       const res = await axios.get(
-        `http://localhost:5000/posts`
+        `${BASE_URL}/posts`
       )
       this.posts = res.data
     },
     async deletePost(postId){
       try {
       const res = await axios.delete(
-          `http://localhost:5000/posts/${postId}`
+          `${BASE_URL}/posts/${postId}`
         )
       const index = this.posts.indexOf(res.data["payload"])
       this.posts.splice(index,1)
