@@ -32,17 +32,14 @@
 }
 
 body {
-/* background: #2193b0;  
-background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  
-background: linear-gradient(to right, #6dd5ed, #2193b0);  */
-  background-image: url("https://i.imgur.com/QmPCXcJ.jpg");
-  /* background-image: url("./assets/glxy.jpg"); */
+  background-image: url("https://i.imgur.com/stbdVjS.jpg");
+  width: 100vw;
   -webkit-background-size:cover ;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-position: center;
-  /* position: absolute; */
+  background-attachment: fixed;
   background-repeat: no-repeat;
 }
 </style>
