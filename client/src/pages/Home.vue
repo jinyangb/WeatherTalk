@@ -22,6 +22,7 @@
         v-for="post in posts"
         :key="post.id"
         :post="post"
+        @deletePost="deletePost"
       /> 
     </div>
     <div v-else class="post-container">
@@ -90,6 +91,17 @@ export default {
         `http://localhost:5000/posts`
       )
       this.posts = res.data
+    },
+    async deletePost(postId){
+      try {
+      const res = await axios.delete(
+          `http://localhost:5000/posts/${postId}`
+        )
+      const index = this.posts.indexOf(res.data["payload"])
+      this.posts.splice(index,1)
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
   

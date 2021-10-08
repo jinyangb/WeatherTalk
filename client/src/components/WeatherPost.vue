@@ -1,6 +1,7 @@
 <template>
   <section class="post">
-    <div>
+    <div class="content">
+    <div >
       <h4>{{ post.temperature }}&#176;</h4>
       <p>{{ post.summary  }}</p>
       <img :src="post.icon_source" />
@@ -10,6 +11,13 @@
       <h4>{{ post.location }}</h4>
       <p>{{ post.content }}</p>
     </div>
+    </div>
+    <div class = "date">
+      <h4> {{post.created_at.slice(0,16)}} </h4>
+    </div>
+    <div class="delete-button-container">
+      <button class="delete-button" @click="deletePost(post.id)">X</button>
+    </div>
   </section>
 </template>
 
@@ -18,6 +26,11 @@ export default {
   name: 'WeatherPost',
   props: {
     post: {}
+  },
+  methods: {
+    deletePost(postId) {
+      this.$emit('deletePost', postId)
+    }
   }
 }
 </script>
@@ -25,6 +38,7 @@ export default {
 <style scoped>
   .post {
     display: flex;
+    flex-direction: column;
     border: 3px solid black;
     border-radius: 15px;
     justify-content:space-evenly;
@@ -47,4 +61,28 @@ export default {
   .post:hover{
     opacity: 0.8;
   }
+  .content {
+    display: flex;
+    justify-content:space-evenly;
+    width:500px;
+  }
+  .date {
+    display: flex; 
+    justify-content:space-evenly;
+    align-items: flex-start;
+    height: 20px;
+    padding: 5px;
+  }
+  .delete-button-container {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+  .delete-button {
+    background-color: black;
+    border-radius: 5px;
+    border: none;
+    color: #64b3f4;
+  }
+
 </style>
