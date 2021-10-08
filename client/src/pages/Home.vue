@@ -5,7 +5,7 @@
         <div class="current-weather">
           <h4>{{ Math.ceil(this.currentWeather.feels_like) }}&#176;</h4>
           <p>{{ this.currentWeather.weather[0].description }}</p>
-          <img :src="`http://openweathermap.org/img/wn/${this.currentWeather.weather[0].icon}@2x.png`" />
+          <img :src="`https://openweathermap.org/img/wn/${this.currentWeather.weather[0].icon}@2x.png`" />
         </div>
       </section>
       <section v-else>
