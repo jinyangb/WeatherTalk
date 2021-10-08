@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p3>Not sure if we want an about page</p3>
+    <p3>About us</p3>
   </div>
 </template>
 
