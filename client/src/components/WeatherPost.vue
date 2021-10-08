@@ -24,6 +24,22 @@ export default {
 
 <style scoped>
   .post {
-    display: flex
+    display: flex;
+    border: 3px solid black;
+    border-radius: 15px;
+    justify-content:space-evenly;
+    padding: 20px;
+    margin: 25px;
+    width:500px;
+    cursor: pointer;
+    background-color:skyblue;
+    border-top-left-radius : 30px;
+    border-bottom-right-radius : 30px;
+    transition: all 0.2s;    
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  .post:hover{
+    opacity: 0.8;
   }
 </style>
