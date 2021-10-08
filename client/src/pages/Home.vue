@@ -88,10 +88,14 @@ export default {
       this.input[event.target.name] = event.target.value
     },
     async getPosts(){
-      const res = await axios.get(
-        `${BASE_URL}/posts`
-      )
-      this.posts = res.data
+      try {
+        const res = await axios.get(
+          `${BASE_URL}/posts`
+        )
+        this.posts = res.data
+      } catch (error) {
+        console.log(error)
+      }
     },
     async deletePost(postId){
       try {
