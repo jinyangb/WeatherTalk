@@ -1,8 +1,16 @@
 // for heroku API
-// const API_URL = process.env.VUE_APP_API_URL
+
+import axios from 'axios'
 
 export const BASE_URL =
   process.env.NODE_ENV === 'production'
-    ? `https://weathertalk.herokuapp.com/`
+    ? process.env.VUE_APP_API_URL
     : 'http://localhost:5000'
 //
+
+axios.create({
+  baseURL:
+    process.env.NODE_ENV === 'production'
+      ? process.env.REACT_APP_API_URL
+      : 'http://localhost:5000'
+})
