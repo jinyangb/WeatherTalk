@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <section v-if="this.currentWeather">
+      <section class="container" v-if="this.currentWeather">
         <h3>Your Current Weather</h3>
         <div class="current-weather">
           <h4>{{ Math.ceil(this.currentWeather.feels_like) }}&#176;</h4>
@@ -97,6 +97,23 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  background-color: #c2e59c; 
+  background: -webkit-linear-gradient(to right, #c2e59c, #64b3f4); 
+  background: linear-gradient(to right, #c2e59c, #64b3f4);
+  border-top-left-radius : 30px;
+  border-bottom-right-radius : 30px;
+  width: 300px;
+  justify-content:center;
+  margin: 40px;
+}
+
+.home{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 h3 {
   font-size: 1.5em;
