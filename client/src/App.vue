@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link> 
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
@@ -18,17 +18,31 @@
 }
 
 #nav {
-  padding: 30px;
+  display: flex;  
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color:gray;
+  padding: 20px;
 }
 
 #nav a.router-link-exact-active {
-  color: #03cae4;
+  color: white;
 }
 
-
+body {
+/* background: #2193b0;  
+background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  
+background: linear-gradient(to right, #6dd5ed, #2193b0);  */
+  background-image: url("https://i.imgur.com/QmPCXcJ.jpg");
+  /* background-image: url("./assets/glxy.jpg"); */
+  -webkit-background-size:cover ;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  /* position: absolute; */
+  background-repeat: no-repeat;
+}
 </style>
