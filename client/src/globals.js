@@ -1,5 +1,4 @@
 // for heroku API
-
 import axios from 'axios'
 
 export const BASE_URL =
@@ -11,6 +10,6 @@ export const BASE_URL =
 axios.create({
   baseURL:
     process.env.NODE_ENV === 'production'
-      ? process.env.REACT_APP_API_URL
+      ? process.env.VUE_APP_API_URL
       : 'http://localhost:5000'
 })
