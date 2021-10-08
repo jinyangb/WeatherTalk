@@ -1,28 +1,32 @@
 <template>
   <div class="home">
-      <section>
+      <section v-if="this.currentWeather">
         <h3>Your Current Weather</h3>
-        <div>
+        <div class="current-weather">
           <h4>{{ Math.ceil(this.currentWeather.feels_like) }}&#176;</h4>
           <p>{{ this.currentWeather.weather[0].description }}</p>
           <img :src="`http://openweathermap.org/img/wn/${this.currentWeather.weather[0].icon}@2x.png`" />
         </div>
       </section>
+      <section v-else>
+        <h3>No Current Weather For data for your location...</h3>
+      </section>
       <form @submit.prevent="submitPost">
-        <input name="name" type="text" placeholder="Name" :value="input.name" @change="handleChange"/>
-        <input name="comment" type="text" placeholder="Comment" :value="input.comment" @change="handleChange"/>
-        <input name="location" type="text" placeholder="Location" :value="input.location" @change="handleChange"/>
+        <input maxlength="80" name="name" type="text" placeholder="Name" :value="input.name" @change="handleChange"/>
+        <input maxlength="80" name="location" type="text" placeholder="Location" :value="input.location" @change="handleChange"/>
+        <textarea maxlength="255" rows="4" cols="50" class="comment" name="comment" type="text" placeholder="Comment" :value="input.comment" @change="handleChange"/>
         <button :disabled="!input.name" >Submit</button>
       </form>
-    <div class="post-container">
+    <div v-if="this.posts" class="post-container">
       <WeatherPost 
         v-for="post in posts"
         :key="post.id"
         :post="post"
       /> 
     </div>
-    <!-- <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <div v-else class="post-container">
+      <h3>No Weather Posts :(</h3>
+    </div>
   </div>
 </template>
 
@@ -94,24 +98,40 @@ export default {
 
 <style scoped>
 
+h3 {
+  font-size: 1.5em;
+}
+.current-weather > h4 {
+  font-size: 1.5em;
+}
+.current-weather > p {
+  font-size: 1.4em;
+}
+
+
 form {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 
 input,
-button {
+button,
+textarea {
   padding: 0.5em 1.2em;
   border-radius: 6px;
   border: 2px solid transparent;
   transition: all 0.2s ease;
+  margin: .2em;
 }
 
-input {
+input,
+textarea {
   border: 2px solid #757575;
   outline: none;
+  width: 500px;
 }
 
 button {
