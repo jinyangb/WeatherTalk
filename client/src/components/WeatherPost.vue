@@ -56,7 +56,7 @@ export default {
     overflow-y: auto;
     font-weight: bold;
     color: black;
-    /* background-image: url("https://i.imgur.com/PtlNNn0t.jpg"); */
+    background-image: url("https://i.imgur.com/PtlNNn0t.jpg");
   }
   .post:hover{
     opacity: 0.8;
